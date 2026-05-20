@@ -67,9 +67,36 @@
       color: var(--muted); text-decoration: none;
       font-size: 0.78rem; font-weight: 500;
       letter-spacing: 0.1em; text-transform: uppercase;
-      transition: color 0.2s;
+      transition: color 0.2s; position: relative;
     }
-    nav a:hover { color: var(--terra); }
+    nav a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 100%;
+      height: 1px; background: var(--terra); transition: right 0.25s;
+    }
+    nav a:hover, nav a.active { color: var(--terra); }
+    nav a.active::after, nav a:hover::after { right: 0; }
+
+    /* hamburger */
+    .ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .ham span { display: block; width: 22px; height: 1.5px; background: var(--muted); transition: all 0.3s; border-radius: 2px; }
+    .ham.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .ham.open span:nth-child(2) { opacity: 0; }
+    .ham.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mob-menu {
+      display: none; position: fixed; top: 56px; left: 0; right: 0;
+      background: rgba(250,245,236,0.97); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); z-index: 199;
+      flex-direction: column; padding: 1.2rem 2rem;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border); transition: color 0.2s;
+    }
+    .mob-menu a:last-child { border-bottom: none; }
+    .mob-menu a:hover { color: var(--terra); }
 
     /* ── HERO ── */
     .hero {
@@ -469,8 +496,9 @@
       .hero { grid-template-columns: 1fr; }
       .hero-right { height: 50vh; }
       .hero-left { padding: 4rem 2rem; }
-      nav ul { gap: 1rem; }
+      nav ul { display: none; }
       nav { padding: 0.9rem 1.5rem; }
+      .ham { display: flex; }
       .tl-row { grid-template-columns: 1fr; }
       .tl-row::after { display: none; }
       .tl-when { text-align: left; padding-bottom: 0.3rem; }
@@ -485,14 +513,26 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">Bharat</div>
-    <ul>
+    <ul id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#volunteering">Volunteering</a></li>
     </ul>
+    <div class="ham" id="ham" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </nav>
+  <div class="mob-menu" id="mob-menu">
+    <a href="#about"        onclick="closeMenu()">About</a>
+    <a href="#skills"       onclick="closeMenu()">Skills</a>
+    <a href="#experience"   onclick="closeMenu()">Experience</a>
+    <a href="#projects"     onclick="closeMenu()">Projects</a>
+    <a href="#education"    onclick="closeMenu()">Education</a>
+    <a href="#volunteering" onclick="closeMenu()">Volunteering</a>
+  </div>
 
   <!-- HERO — split layout -->
   <div class="hero">
@@ -512,7 +552,7 @@
       </p>
 
       <div class="hero-tags">
-        <span class="htag htag-terra">Available for Placement</span>
+        <span class="htag htag-terra">Available Sep 2025 – Sep 2026</span>
         <span class="htag htag-navy">GMP / GLP</span>
         <span class="htag htag-navy">HPLC &amp; LC-MS</span>
         <span class="htag htag-sage">QC Documentation</span>
@@ -526,6 +566,10 @@
         <a href="mailto:bharatbhatia4500@gmail.com" class="btn btn-outline">
           <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           Email
+        </a>
+        <a href="Bharat_CV.pdf" download class="btn btn-li">
+          <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 9v2h6v-2h-6zm0-2h6v-2h-6v2z"/></svg>
+          Download CV
         </a>
         <a href="https://www.linkedin.com/in/bharatbhatia4500/" target="_blank" class="btn btn-li">
           <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -542,7 +586,7 @@
         <div class="avatar-wrap">
           <div class="ring-blur"></div>
           <div class="ring"></div>
-          <div class="avatar">B</div>
+          <div class="avatar" style="overflow:hidden;padding:0;"><img src="photo.jpg" alt="Bharat" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;"/></div>
         </div>
         <div class="hero-name-card">
           <h2>Bharat</h2>
@@ -687,11 +731,13 @@
             <div class="tl-dot"></div>
             <div class="tl-card">
               <h3>Technology Change Agent</h3>
-              <div class="tl-org">ICAR-NDRI</div>
+              <div class="tl-org">ICAR-NDRI · Krishi Vigyan Kendra, Karnal</div>
+              <p style="font-size:0.82rem;color:var(--terra);margin-bottom:0.7rem;font-style:italic;">Project: Awareness &amp; Demonstrations for Popularisation of Fermented Organic Manure (FOM) and Liquid Fermented Organic Manure (LFOM)</p>
               <ul>
-                <li>Managed and analysed datasets to support evidence-based decision making.</li>
-                <li>Worked independently while collaborating with multi-disciplinary teams.</li>
-                <li>Supported project teams by organising information and contributing to technical tasks.</li>
+                <li>Conducted field data collection across farming sites to track organic manure adoption and soil impact.</li>
+                <li>Managed, cleaned and analysed project datasets to support evidence-based reporting.</li>
+                <li>Prepared technical documentation and project reports for the research team.</li>
+                <li>Collaborated with multidisciplinary staff across agronomy, soil science, and outreach.</li>
               </ul>
             </div>
           </div>
@@ -701,12 +747,13 @@
           <div class="tl-body">
             <div class="tl-dot"></div>
             <div class="tl-card">
-              <h3>Science Tutor</h3>
+              <h3>Chemistry &amp; Mathematics Tutor</h3>
               <div class="tl-org">Science Academy</div>
               <ul>
-                <li>Communicated complex scientific concepts clearly to diverse audiences.</li>
-                <li>Encouraged problem-solving and critical thinking in students.</li>
-                <li>Built strong, trusting relationships that fostered collaborative learning.</li>
+                <li>Taught Chemistry and Mathematics to students at secondary and undergraduate level.</li>
+                <li>Broke down complex topics — organic reactions, calculus, algebra — into clear, structured lessons.</li>
+                <li>Encouraged problem-solving and analytical thinking, improving student confidence and results.</li>
+                <li>Built strong, trusting relationships that fostered a collaborative learning environment.</li>
               </ul>
             </div>
           </div>
@@ -725,6 +772,33 @@
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="fade">
+        <p class="sec-label">Research</p>
+        <h2 class="sec-heading">Projects</h2>
+        <div class="sec-rule"><div class="sec-rule-dot"></div></div>
+      </div>
+
+      <div class="tl-card fade" style="position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--terra),var(--gold),var(--sage));"></div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;margin-bottom:0.9rem;">
+          <div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.2rem;">Impact of Vaterite Calcium Carbonate on Soil Properties and Plant Development</h3>
+            <div class="tl-org">MSc Research Project · Nottingham Trent University</div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--soft);background:var(--bg);border:1px solid var(--border);padding:0.25rem 0.7rem;border-radius:4px;white-space:nowrap;">In Progress · 2026</span>
+        </div>
+
+        <div style="background:rgba(184,92,48,0.05);border:1px solid rgba(184,92,48,0.15);border-radius:8px;padding:1rem 1.2rem;">
+          <p style="font-size:0.78rem;font-family:'DM Mono',monospace;color:var(--terra);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">Aim</p>
+          <p style="font-size:0.88rem;color:var(--ink);line-height:1.7;">To investigate the impact of vaterite calcium carbonate particles on soil physicochemical properties and plant development, and to evaluate whether vaterite represents a more efficient and sustainable alternative to conventional liming agents.</p>
         </div>
       </div>
     </div>
@@ -875,6 +949,24 @@
           </div>
         </div>
 
+        <!-- RSC -->
+        <div class="ach-single fade" style="max-width:none;flex-direction:column;align-items:flex-start;gap:0.8rem;">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div class="ach-icon-wrap" style="background:linear-gradient(135deg,rgba(30,58,95,0.15),rgba(30,58,95,0.08));border-color:rgba(30,58,95,0.25);">⚗️</div>
+            <div>
+              <h3 style="font-size:0.95rem;font-weight:600;color:var(--ink);margin-bottom:0.15rem;">Affiliate Member — Royal Society of Chemistry</h3>
+              <p style="font-size:0.8rem;color:var(--soft);">RSC · Member ID: 803793</p>
+            </div>
+          </div>
+          <p style="font-size:0.81rem;color:var(--muted);line-height:1.7;">Recognised by the UK's leading chemistry professional body. Access to peer-reviewed journals, Chemistry World, professional development awards, RSC Pathfinder, and a global network of chemists.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(30,58,95,0.08);border:1px solid rgba(30,58,95,0.15);color:var(--navy);">RSC Journals Access</span>
+            <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(30,58,95,0.08);border:1px solid rgba(30,58,95,0.15);color:var(--navy);">Chemistry World</span>
+            <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(30,58,95,0.08);border:1px solid rgba(30,58,95,0.15);color:var(--navy);">Professional Development</span>
+            <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(30,58,95,0.08);border:1px solid rgba(30,58,95,0.15);color:var(--navy);">RSC Pathfinder</span>
+          </div>
+        </div>
+
         <!-- Course Rep -->
         <div class="ach-single fade" style="max-width:none;">
           <div class="ach-icon-wrap">🎓</div>
@@ -964,13 +1056,259 @@
     <p><a href="https://www.linkedin.com/in/bharatbhatia4500/" target="_blank">linkedin.com/in/bharatbhatia4500</a></p>
   </footer>
 
+  <canvas id="chem-bg" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
   <script>
+    /* ── SCROLL FADE ── */
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 100);
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+    /* ── NAV ACTIVE STATE ── */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('#nav-links a, .mob-menu a');
+    const navObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          navLinks.forEach(a => {
+            if (a.getAttribute('href') === '#' + e.target.id) a.classList.add('active');
+          });
+        }
+      });
+    }, { threshold: 0.35 });
+    sections.forEach(s => navObs.observe(s));
+
+    /* ── HAMBURGER ── */
+    function toggleMenu() {
+      document.getElementById('ham').classList.toggle('open');
+      document.getElementById('mob-menu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('ham').classList.remove('open');
+      document.getElementById('mob-menu').classList.remove('open');
+    }
+
+    /* ── CHEMISTRY BACKGROUND CANVAS ── */
+    const canvas = document.getElementById('chem-bg');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const C = {
+      terra : 'rgba(184,92,48,',
+      navy  : 'rgba(30,58,95,',
+      gold  : 'rgba(201,151,58,',
+      sage  : 'rgba(74,124,89,',
+    };
+    const palette = Object.values(C);
+    const rndColor = () => palette[Math.floor(Math.random() * palette.length)];
+
+    /* --- Hexagon (benzene ring) --- */
+    class Hex {
+      constructor(init) {
+        const col = rndColor();
+        this.x    = Math.random() * canvas.width;
+        this.y    = init ? Math.random() * canvas.height : -80;
+        this.size = 18 + Math.random() * 44;
+        this.stroke = col + '0.055)';
+        this.vx   = (Math.random() - 0.5) * 0.25;
+        this.vy   = 0.18 + Math.random() * 0.22;
+        this.rot  = Math.random() * Math.PI * 2;
+        this.drot = (Math.random() - 0.5) * 0.004;
+        /* optional inner ring (double-bond style) */
+        this.inner = Math.random() > 0.5;
+      }
+      step() {
+        this.x += this.vx; this.y += this.vy; this.rot += this.drot;
+        if (this.y > canvas.height + 100) { this.y = -80; this.x = Math.random() * canvas.width; }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.strokeStyle = this.stroke;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const a = (i * Math.PI) / 3;
+          i === 0 ? ctx.moveTo(this.size * Math.cos(a), this.size * Math.sin(a))
+                  : ctx.lineTo(this.size * Math.cos(a), this.size * Math.sin(a));
+        }
+        ctx.closePath();
+        ctx.stroke();
+        if (this.inner) {
+          const r2 = this.size * 0.55;
+          ctx.beginPath();
+          for (let i = 0; i < 6; i++) {
+            const a = (i * Math.PI) / 3;
+            i === 0 ? ctx.moveTo(r2 * Math.cos(a), r2 * Math.sin(a))
+                    : ctx.lineTo(r2 * Math.cos(a), r2 * Math.sin(a));
+          }
+          ctx.closePath();
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+    }
+
+    /* --- Molecule (nodes + bonds) --- */
+    class Mol {
+      constructor(init) {
+        const col = rndColor();
+        this.x    = Math.random() * canvas.width;
+        this.y    = init ? Math.random() * canvas.height : Math.random() * canvas.height;
+        this.vx   = (Math.random() - 0.5) * 0.35;
+        this.vy   = (Math.random() - 0.5) * 0.35;
+        this.rot  = Math.random() * Math.PI * 2;
+        this.drot = (Math.random() - 0.5) * 0.003;
+        this.bond  = col + '0.07)';
+        this.node  = col + '0.13)';
+        const n   = 3 + Math.floor(Math.random() * 3);
+        const spread = 24 + Math.random() * 28;
+        this.pts  = Array.from({length: n}, () => ({
+          x: (Math.random() - 0.5) * spread * 2,
+          y: (Math.random() - 0.5) * spread * 2,
+        }));
+        this.cyclic = n >= 4 && Math.random() > 0.4;
+      }
+      step() {
+        this.x += this.vx; this.y += this.vy; this.rot += this.drot;
+        const pad = 120;
+        if (this.x < -pad || this.x > canvas.width + pad ||
+            this.y < -pad || this.y > canvas.height + pad) {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.strokeStyle = this.bond;
+        ctx.lineWidth = 1;
+        for (let i = 0; i < this.pts.length - 1; i++) {
+          ctx.beginPath();
+          ctx.moveTo(this.pts[i].x, this.pts[i].y);
+          ctx.lineTo(this.pts[i+1].x, this.pts[i+1].y);
+          ctx.stroke();
+        }
+        if (this.cyclic) {
+          ctx.beginPath();
+          ctx.moveTo(this.pts[this.pts.length-1].x, this.pts[this.pts.length-1].y);
+          ctx.lineTo(this.pts[0].x, this.pts[0].y);
+          ctx.stroke();
+        }
+        ctx.fillStyle = this.node;
+        for (const p of this.pts) {
+          ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2); ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    /* --- Atom (nucleus + elliptical orbit + electron) --- */
+    class Atom {
+      constructor(init) {
+        const col = rndColor();
+        this.x    = Math.random() * canvas.width;
+        this.y    = init ? Math.random() * canvas.height : -80;
+        this.vx   = (Math.random() - 0.5) * 0.2;
+        this.vy   = 0.12 + Math.random() * 0.2;
+        this.r    = 14 + Math.random() * 22;
+        this.tilt = Math.random() * Math.PI;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = 0.012 + Math.random() * 0.018;
+        this.orb  = col + '0.06)';
+        this.dot  = col + '0.18)';
+        this.nuc  = col + '0.14)';
+      }
+      step() {
+        this.x += this.vx; this.y += this.vy; this.angle += this.speed;
+        if (this.y > canvas.height + 100) { this.y = -80; this.x = Math.random() * canvas.width; }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.beginPath(); ctx.arc(0, 0, 3, 0, Math.PI*2);
+        ctx.fillStyle = this.nuc; ctx.fill();
+        ctx.save();
+        ctx.rotate(this.tilt);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.r, this.r * 0.38, 0, 0, Math.PI*2);
+        ctx.strokeStyle = this.orb; ctx.lineWidth = 0.8; ctx.stroke();
+        const ex = this.r * Math.cos(this.angle);
+        const ey = this.r * 0.38 * Math.sin(this.angle);
+        ctx.beginPath(); ctx.arc(ex, ey, 2, 0, Math.PI*2);
+        ctx.fillStyle = this.dot; ctx.fill();
+        ctx.restore();
+        ctx.restore();
+      }
+    }
+
+    /* --- Flask outline --- */
+    class Flask {
+      constructor(init) {
+        const col = rndColor();
+        this.x    = Math.random() * canvas.width;
+        this.y    = init ? Math.random() * canvas.height : -120;
+        this.s    = 0.5 + Math.random() * 0.8;
+        this.vx   = (Math.random() - 0.5) * 0.2;
+        this.vy   = 0.15 + Math.random() * 0.2;
+        this.rot  = (Math.random() - 0.5) * 0.4;
+        this.drot = (Math.random() - 0.5) * 0.003;
+        this.col  = col + '0.06)';
+      }
+      step() {
+        this.x += this.vx; this.y += this.vy; this.rot += this.drot;
+        if (this.y > canvas.height + 140) { this.y = -120; this.x = Math.random() * canvas.width; }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.scale(this.s, this.s);
+        ctx.strokeStyle = this.col;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        /* neck */
+        ctx.moveTo(-8, -40);
+        ctx.lineTo(-8, -10);
+        /* shoulder curve left */
+        ctx.bezierCurveTo(-8, 0, -32, 10, -32, 30);
+        /* bottom arc */
+        ctx.arc(0, 30, 32, Math.PI, 0);
+        /* shoulder curve right */
+        ctx.bezierCurveTo(32, 10, 8, 0, 8, -10);
+        ctx.lineTo(8, -40);
+        /* rim */
+        ctx.moveTo(-10, -40); ctx.lineTo(10, -40);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    /* initialise objects */
+    const hexs  = Array.from({length: 7},  () => new Hex(true));
+    const mols  = Array.from({length: 6},  () => new Mol(true));
+    const atoms = Array.from({length: 5},  () => new Atom(true));
+    const flask = Array.from({length: 3},  () => new Flask(true));
+    const all   = [...hexs, ...mols, ...atoms, ...flask];
+
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const o of all) { o.step(); o.draw(); }
+      requestAnimationFrame(loop);
+    }
+    loop();
   </script>
 </body>
 </html>
