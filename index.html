@@ -762,12 +762,12 @@
     .puppy-bounce{animation:p-bounce 1s ease-in-out infinite alternate;
       display:block;margin:0 auto;}
     @keyframes p-bounce{from{transform:translateY(0)}to{transform:translateY(-10px)}}
-    .puppy-tail{transform-origin:8px 4px;animation:wag .45s ease-in-out infinite alternate;}
-    @keyframes wag{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
-    .puppy-ear-l{transform-origin:22px 34px;animation:ear-l 2.2s ease-in-out infinite;}
-    .puppy-ear-r{transform-origin:54px 32px;animation:ear-r 2.6s ease-in-out infinite;}
-    @keyframes ear-l{0%,100%{transform:rotate(0)}50%{transform:rotate(12deg)}}
-    @keyframes ear-r{0%,100%{transform:rotate(0)}50%{transform:rotate(-12deg)}}
+    .puppy-tail{transform-origin:110px 95px;animation:wag .45s ease-in-out infinite alternate;}
+    @keyframes wag{from{transform:rotate(-22deg)}to{transform:rotate(22deg)}}
+    .puppy-ear-l{transform-origin:38px 68px;animation:ear-l 2.2s ease-in-out infinite;}
+    .puppy-ear-r{transform-origin:122px 68px;animation:ear-r 2.6s ease-in-out infinite;}
+    @keyframes ear-l{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+    @keyframes ear-r{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}
 
     /* ── PRINT ADDITIONS ── */
     @media print{
@@ -957,41 +957,23 @@
       </div>
         <p class="pt-section-label">Analytical Techniques</p>
         <div class="pt-grid">
-          <div class="pt-el c-terra fade" style="--offset:5.03">
-            <svg class="pt-ring" width="20" height="20" viewBox="0 0 20 20"><circle class="r-track" cx="10" cy="10" r="8"/><circle class="r-fill" cx="10" cy="10" r="8"/></svg>
-            <span class="pt-num">01</span>
-            <span class="pt-sym">Hp</span>
-            <span class="pt-name">HPLC</span>
-          </div>
           <div class="pt-el c-terra fade" style="--offset:7.54">
             <svg class="pt-ring" width="20" height="20" viewBox="0 0 20 20"><circle class="r-track" cx="10" cy="10" r="8"/><circle class="r-fill" cx="10" cy="10" r="8"/></svg>
-            <span class="pt-num">02</span>
+            <span class="pt-num">01</span>
             <span class="pt-sym">Lm</span>
             <span class="pt-name">LC-MS</span>
           </div>
           <div class="pt-el c-terra fade" style="--offset:6.03">
             <svg class="pt-ring" width="20" height="20" viewBox="0 0 20 20"><circle class="r-track" cx="10" cy="10" r="8"/><circle class="r-fill" cx="10" cy="10" r="8"/></svg>
-            <span class="pt-num">03</span>
+            <span class="pt-num">02</span>
             <span class="pt-sym">Uv</span>
             <span class="pt-name">UV-Vis</span>
           </div>
           <div class="pt-el c-terra fade" style="--offset:9.05">
             <svg class="pt-ring" width="20" height="20" viewBox="0 0 20 20"><circle class="r-track" cx="10" cy="10" r="8"/><circle class="r-fill" cx="10" cy="10" r="8"/></svg>
-            <span class="pt-num">04</span>
+            <span class="pt-num">03</span>
             <span class="pt-sym">Dt</span>
             <span class="pt-name">Dissolution</span>
-          </div>
-          <div class="pt-el c-terra fade" style="--offset:6.53">
-            <svg class="pt-ring" width="20" height="20" viewBox="0 0 20 20"><circle class="r-track" cx="10" cy="10" r="8"/><circle class="r-fill" cx="10" cy="10" r="8"/></svg>
-            <span class="pt-num">05</span>
-            <span class="pt-sym">Ic</span>
-            <span class="pt-name">Calibration</span>
-          </div>
-          <div class="pt-el c-terra fade" style="--offset:5.03">
-            <svg class="pt-ring" width="20" height="20" viewBox="0 0 20 20"><circle class="r-track" cx="10" cy="10" r="8"/><circle class="r-fill" cx="10" cy="10" r="8"/></svg>
-            <span class="pt-num">06</span>
-            <span class="pt-sym">Tr</span>
-            <span class="pt-name">Troubleshoot</span>
           </div>
         </div>
         <p class="pt-section-label">Quality & Documentation</p>
@@ -1476,25 +1458,60 @@
   <!-- PUPPY -->
   <div class="puppy-section">
     <div class="speech-bubble">Thanks for visiting! Woof! &#x1F43E;</div>
-    <svg class="puppy-bounce" width="150" height="122" viewBox="0 0 150 122" xmlns="http://www.w3.org/2000/svg">
-      <g class="puppy-tail">
-        <path d="M112 72 Q132 52 124 34 Q121 26 127 20" stroke="#c9973a" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <svg class="puppy-bounce" width="160" height="150" viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg">
+      <!-- Tail (wagging behind body) -->
+      <g class="puppy-tail" style="transform-origin:110px 95px">
+        <path d="M110 95 Q128 80 122 60 Q118 48 126 40" stroke="#c9973a" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <path d="M110 95 Q128 80 122 60 Q118 48 126 40" stroke="#d4aa4a" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
       </g>
-      <ellipse cx="82" cy="80" rx="40" ry="28" fill="#d4aa4a"/>
-      <circle cx="40" cy="58" r="28" fill="#d4aa4a"/>
-      <ellipse class="puppy-ear-l" cx="22" cy="36" rx="12" ry="18" fill="#b85c30" transform="rotate(-18 22 36)"/>
-      <ellipse class="puppy-ear-r" cx="58" cy="34" rx="12" ry="18" fill="#b85c30" transform="rotate(15 58 34)"/>
-      <circle cx="30" cy="54" r="5.5" fill="#1c1208"/>
-      <circle cx="50" cy="54" r="5.5" fill="#1c1208"/>
-      <circle cx="32" cy="52" r="2" fill="white"/>
-      <circle cx="52" cy="52" r="2" fill="white"/>
-      <ellipse cx="40" cy="65" rx="6" ry="4.5" fill="#1c1208"/>
-      <path d="M33 72 Q40 79 47 72" stroke="#1c1208" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M14 72 Q40 80 66 72" stroke="#1e3a5f" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <circle cx="40" cy="78" r="5" fill="#c9973a" stroke="#1e3a5f" stroke-width="1.5"/>
-      <ellipse cx="56" cy="108" rx="12" ry="7" fill="#b85c30"/>
-      <ellipse cx="84" cy="110" rx="12" ry="7" fill="#b85c30"/>
-      <ellipse cx="112" cy="108" rx="12" ry="7" fill="#b85c30"/>
+      <!-- Body -->
+      <path d="M28 105 Q26 82 38 70 Q52 58 80 58 Q108 58 122 70 Q134 82 132 105 Q128 128 80 130 Q32 128 28 105Z" fill="#d4aa4a"/>
+      <!-- Body shading -->
+      <path d="M38 70 Q52 58 80 58 Q108 58 122 70 Q118 76 80 78 Q42 76 38 70Z" fill="#c9973a" opacity="0.25"/>
+      <!-- Left floppy ear -->
+      <path class="puppy-ear-l" d="M38 44 Q20 30 18 52 Q16 70 36 72 Q46 66 44 50 Q42 40 38 44Z" fill="#b85c30"/>
+      <path class="puppy-ear-l" d="M36 50 Q24 52 22 62 Q28 68 36 66 Q42 60 40 52Z" fill="#8c3d18" opacity="0.35"/>
+      <!-- Right floppy ear -->
+      <path class="puppy-ear-r" d="M122 44 Q140 30 142 52 Q144 70 124 72 Q114 66 116 50 Q118 40 122 44Z" fill="#b85c30"/>
+      <path class="puppy-ear-r" d="M124 50 Q136 52 138 62 Q132 68 124 66 Q118 60 120 52Z" fill="#8c3d18" opacity="0.35"/>
+      <!-- Head -->
+      <circle cx="80" cy="50" r="36" fill="#d4aa4a"/>
+      <!-- Head top shading -->
+      <path d="M52 28 Q80 18 108 28 Q104 36 80 38 Q56 36 52 28Z" fill="#c9973a" opacity="0.2"/>
+      <!-- Left eye -->
+      <circle cx="64" cy="46" r="9" fill="#1c1208"/>
+      <circle cx="64" cy="46" r="5" fill="#3d2010"/>
+      <circle cx="67" cy="43" r="3" fill="white"/>
+      <circle cx="61" cy="50" r="1.2" fill="white" opacity="0.6"/>
+      <!-- Right eye -->
+      <circle cx="96" cy="46" r="9" fill="#1c1208"/>
+      <circle cx="96" cy="46" r="5" fill="#3d2010"/>
+      <circle cx="99" cy="43" r="3" fill="white"/>
+      <circle cx="93" cy="50" r="1.2" fill="white" opacity="0.6"/>
+      <!-- Muzzle -->
+      <ellipse cx="80" cy="62" rx="16" ry="12" fill="#c9973a" opacity="0.5"/>
+      <!-- Nose -->
+      <path d="M72 58 Q80 54 88 58 Q85 65 80 66 Q75 65 72 58Z" fill="#1c1208"/>
+      <circle cx="75" cy="59" r="2" fill="white" opacity="0.55"/>
+      <!-- Smile -->
+      <path d="M70 67 Q75 73 80 74 Q85 73 90 67" stroke="#1c1208" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Cheek blush -->
+      <ellipse cx="50" cy="60" rx="10" ry="7" fill="rgba(220,100,80,0.15)"/>
+      <ellipse cx="110" cy="60" rx="10" ry="7" fill="rgba(220,100,80,0.15)"/>
+      <!-- Collar -->
+      <path d="M42 80 Q80 90 118 80" stroke="#1e3a5f" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <circle cx="80" cy="88" r="7" fill="#c9973a" stroke="#1e3a5f" stroke-width="2"/>
+      <text x="80" y="92" text-anchor="middle" fill="#1e3a5f" font-size="7" font-weight="bold">B</text>
+      <!-- Left front paw -->
+      <path d="M46 125 Q38 130 38 138 Q46 142 54 138 Q56 130 50 125Z" fill="#c9973a"/>
+      <circle cx="40" cy="139" r="4" fill="#b85c30"/>
+      <circle cx="47" cy="141" r="4" fill="#b85c30"/>
+      <circle cx="54" cy="139" r="4" fill="#b85c30"/>
+      <!-- Right front paw -->
+      <path d="M114 125 Q122 130 122 138 Q114 142 106 138 Q104 130 110 125Z" fill="#c9973a"/>
+      <circle cx="120" cy="139" r="4" fill="#b85c30"/>
+      <circle cx="113" cy="141" r="4" fill="#b85c30"/>
+      <circle cx="106" cy="139" r="4" fill="#b85c30"/>
     </svg>
     <p style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:var(--muted);margin-top:1rem;font-style:italic;">Built with curiosity and a lot of caffeine.</p>
   </div>
@@ -1893,12 +1910,40 @@
       const btn = document.getElementById('btn-send');
       form.addEventListener('submit', e => {
         e.preventDefault();
-        btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Message Sent!';
-        btn.style.background = 'var(--sage)';
-        setTimeout(() => {
+        const data = {
+          name:    document.getElementById('cf-name').value,
+          email:   document.getElementById('cf-email').value,
+          message: document.getElementById('cf-msg').value
+        };
+        btn.disabled = true;
+        btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Sending…';
+        fetch('https://formsubmit.co/ajax/bharatbhatia4500@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success === 'true' || res.success === true) {
+            btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Message Sent!';
+            btn.style.background = 'var(--sage)';
+            form.reset();
+          } else {
+            btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg> Send Message';
+            btn.style.background = 'var(--terra)';
+            alert('Something went wrong. Please email directly: bharatbhatia4500@gmail.com');
+          }
+          btn.disabled = false;
+          setTimeout(() => {
+            btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg> Send Message';
+            btn.style.background = '';
+          }, 4000);
+        })
+        .catch(() => {
           btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg> Send Message';
-          btn.style.background = ''; form.reset();
-        }, 3000);
+          btn.style.background = ''; btn.disabled = false;
+          alert('Could not send. Please email: bharatbhatia4500@gmail.com');
+        });
       });
       btn && btn.addEventListener('click', function(e) {
         const r=document.createElement('span'); r.classList.add('btn-ripple');
