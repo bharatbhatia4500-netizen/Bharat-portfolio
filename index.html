@@ -1903,53 +1903,37 @@
       animTrail();
     })();
 
-    /* ── CONTACT FORM ── */
+    /* ── CONTACT FORM (mailto — works everywhere, no backend needed) ── */
     (function() {
       const form = document.getElementById('contact-form');
       if (!form) return;
       const btn = document.getElementById('btn-send');
       form.addEventListener('submit', e => {
         e.preventDefault();
-        const data = {
-          name:    document.getElementById('cf-name').value,
-          email:   document.getElementById('cf-email').value,
-          message: document.getElementById('cf-msg').value
-        };
-        btn.disabled = true;
-        btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Sending…';
-        fetch('https://formsubmit.co/ajax/bharatbhatia4500@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(data)
-        })
-        .then(r => r.json())
-        .then(res => {
-          if (res.success === 'true' || res.success === true) {
-            btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Message Sent!';
-            btn.style.background = 'var(--sage)';
-            form.reset();
-          } else {
-            btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg> Send Message';
-            btn.style.background = 'var(--terra)';
-            alert('Something went wrong. Please email directly: bharatbhatia4500@gmail.com');
-          }
-          btn.disabled = false;
-          setTimeout(() => {
-            btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg> Send Message';
-            btn.style.background = '';
-          }, 4000);
-        })
-        .catch(() => {
+        const name    = document.getElementById('cf-name').value.trim();
+        const email   = document.getElementById('cf-email').value.trim();
+        const message = document.getElementById('cf-msg').value.trim();
+        const subject = encodeURIComponent('Portfolio Enquiry from ' + name);
+        const body    = encodeURIComponent(
+          'Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message
+        );
+        window.location.href =
+          'mailto:bharatbhatia4500@gmail.com?subject=' + subject + '&body=' + body;
+        /* show success state after brief delay */
+        btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Opening email…';
+        btn.style.background = 'var(--sage)';
+        setTimeout(() => {
           btn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg> Send Message';
-          btn.style.background = ''; btn.disabled = false;
-          alert('Could not send. Please email: bharatbhatia4500@gmail.com');
-        });
+          btn.style.background = '';
+          form.reset();
+        }, 3000);
       });
       btn && btn.addEventListener('click', function(e) {
-        const r=document.createElement('span'); r.classList.add('btn-ripple');
-        const rect=this.getBoundingClientRect();
-        r.style.left=(e.clientX-rect.left)+'px'; r.style.top=(e.clientY-rect.top)+'px';
-        this.appendChild(r); setTimeout(()=>r.remove(),600);
+        const r = document.createElement('span'); r.classList.add('btn-ripple');
+        const rect = this.getBoundingClientRect();
+        r.style.left = (e.clientX - rect.left) + 'px';
+        r.style.top  = (e.clientY - rect.top)  + 'px';
+        this.appendChild(r); setTimeout(() => r.remove(), 600);
       });
     })();
 
