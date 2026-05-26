@@ -772,7 +772,7 @@
     /* ── PRINT ADDITIONS ── */
     @media print{
       #cursor-el,#cursor-trail-canvas,#confetti-canvas,
-      .cv-toast,.puppy-section,#contact,#dna-loader,.visitor-counter{display:none!important;}
+      .cv-toast,.puppy-section,#contact,#dna-loader{display:none!important;}
     }
     /* ── MOBILE ADDITIONS ── */
     @media(max-width:600px){
@@ -836,32 +836,6 @@
       color: var(--muted); animation: dna-blink 1s step-end infinite;
     }
     @keyframes dna-blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-    /* ── VISITOR COUNTER ── */
-    .visitor-counter {
-      display: inline-flex; align-items: center; gap: 0.9rem;
-      background: rgba(30,58,95,0.07);
-      border: 1px solid rgba(30,58,95,0.15);
-      border-radius: 8px; padding: 0.55rem 1.1rem;
-      margin-top: 1.4rem; position: relative; overflow: hidden;
-    }
-    .vc-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--sage);
-      box-shadow: 0 0 6px var(--sage);
-      animation: vc-pulse 1.4s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-    @keyframes vc-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
-    .vc-label {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted);
-    }
-    .vc-num {
-      font-family: 'DM Mono', monospace; font-size: 1.05rem;
-      font-weight: 600; color: var(--navy); min-width: 3.5ch;
-    }
 
     /* ── MILESTONE TIMELINE ── */
     .ms-tl { display: flex; flex-direction: column; gap: 0; position: relative; }
@@ -993,11 +967,6 @@
           <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           LinkedIn
         </a>
-      </div>
-      <div class="visitor-counter">
-        <div class="vc-dot"></div>
-        <span class="vc-label">Visitors analysed</span>
-        <span class="vc-num" id="vc-num">&#x2014;</span>
       </div>
     </div>
 
@@ -2171,22 +2140,6 @@
       }, 2200);
     });
 
-    /* ── VISITOR COUNTER ── */
-    (function() {
-      const el = document.getElementById('vc-num');
-      if (!el) return;
-      const launch = new Date('2025-09-01').getTime();
-      const days = Math.max(0, Math.floor((Date.now() - launch) / 86400000));
-      const target = 847 + days * 3;
-      const start = target - 28;
-      let current = start;
-      const step = () => {
-        current = Math.min(current + Math.ceil((target - current) / 12 + 1), target);
-        el.textContent = current.toLocaleString();
-        if (current < target) setTimeout(step, 55);
-      };
-      setTimeout(step, 2400);
-    })();
   </script>
 </body>
 </html>
